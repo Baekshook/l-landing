@@ -1,5 +1,4 @@
 import {
-  Container,
   SimpleGrid,
   Image,
   Flex,
@@ -9,10 +8,10 @@ import {
   StackDivider,
   Icon,
   useColorModeValue,
-  Center,
 } from "@chakra-ui/react";
 import { IoJournalSharp, IoLogoBitcoin, IoWalletSharp } from "react-icons/io5";
 import securityImage from "@assets/security.png";
+import { forwardRef } from "react";
 
 const Feature = ({ text, icon, iconBg }) => {
   return (
@@ -32,7 +31,7 @@ const Feature = ({ text, icon, iconBg }) => {
   );
 };
 
-export default function SplitWithImage() {
+const Features = forwardRef((props, ref) => {
   return (
     <Flex
       justify={"center"}
@@ -40,6 +39,7 @@ export default function SplitWithImage() {
       px={{ base: "20px", sm: "30px", lg: "50px" }}
       h={"100vh"}
       align={"center"}
+      ref={ref}
     >
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
@@ -109,4 +109,5 @@ export default function SplitWithImage() {
       </SimpleGrid>
     </Flex>
   );
-}
+});
+export default Features;

@@ -10,10 +10,11 @@ import {
 } from "@chakra-ui/react";
 
 import lockedImage from "@assets/locked.png";
+import { forwardRef } from "react";
 
-export default function CallToActionWithIllustration() {
+const Hero = forwardRef((props, ref) => {
   return (
-    <Container maxW={"5xl"}>
+    <Container maxW={"5xl"} ref={ref}>
       <Stack
         textAlign={"center"}
         align={"center"}
@@ -26,16 +27,16 @@ export default function CallToActionWithIllustration() {
           lineHeight={"110%"}
         >
           당신의{" "}
-          <Text as={"spam"} color={"purple.400"}>
+          <Text as={"span"} color={"purple.400"}>
             비
           </Text>
           밀을&nbsp;
-          <Text as={"spam"} color={"purple.400"}>
+          <Text as={"span"} color={"purple.400"}>
             담
           </Text>
           아주세요
         </Heading>
-        <Text lineHeight={"120%"} maxW={"3xl"}>
+        <Text maxW={"2xl"} lineHeight={"180%"}>
           당신의 비밀을 영원히 안전하게 보관해 주는 서비스 비담입니다.
           <br />
           블록체인 기술을 활용해 당신의 비밀을 어느 누구도 확인할 수 없습니다.
@@ -53,27 +54,24 @@ export default function CallToActionWithIllustration() {
           >
             비담 시작하기
           </Button>
-          <Button
-            rounded={"full"}
-            px={6}
-            bg={"gray.400"}
-            _hover={{ bg: "gray.600" }}
-          >
+          <Button rounded={"full"} bg={"gray.600"} px={6}>
             비담 알아보기
           </Button>
         </Stack>
         <Flex w={"full"} align={"center"} justify={"center"} pos={"relative"}>
-          <Image src={lockedImage} h={"80px"} />
+          <Image src={lockedImage} height={"80px"}></Image>
           <Box
-            w={"80px"}
-            h={"80px"}
-            bg={"linear-gradient(160deg, #0093E9 0%, #80D0C7 50%)"}
+            w={"90px"}
+            h={"90px"}
+            bgGradient="linear(to-r, #F213A4, #040BBF)"
             pos={"absolute"}
-            zIndex={-3}
-            filter={"blur(70px)"}
+            opacity={0.5}
+            rounded="10px"
           />
         </Flex>
       </Stack>
     </Container>
   );
-}
+});
+
+export default Hero;

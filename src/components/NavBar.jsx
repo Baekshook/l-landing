@@ -22,14 +22,14 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-export default function WithSubnavigation() {
+export default function NavBar({ currentVisibleIndex, onClickNavLink }) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box pos={"fixed"} top={0} w={"100%"} zIndex={999}>
+    <Box pos={"fixed"} top={0} width={"100%"} zIndex={999}>
       <Flex
-        bg={"rgba(0,0,0,0.5)"}
-        backdropFilter={"blur(7px) saturate(50%)"}
+        bg={"rgba(0, 0, 0, 0.5)"}
+        backdropFilter={"saturate(50%) blur(7px)"}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
@@ -51,7 +51,7 @@ export default function WithSubnavigation() {
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
             _hover={{
-              bg: "purple.300",
+              bg: "purple.500",
             }}
           />
         </Flex>
@@ -65,7 +65,10 @@ export default function WithSubnavigation() {
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
+            <DesktopNav
+              currentVisibleIndex={currentVisibleIndex}
+              onClickNavLink={onClickNavLink}
+            />
           </Flex>
         </Flex>
 
@@ -97,23 +100,23 @@ export default function WithSubnavigation() {
   );
 }
 
-const DesktopNav = () => {
+const DesktopNav = ({ currentVisibleIndex, onClickNavLink }) => {
   const linkColor = "white";
   const linkHoverColor = "purple.400";
   const popoverContentBgColor = "black";
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS.map((navItem, index) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItem.href ?? "#"}
+                onClick={() => onClickNavLink(index)}
                 fontSize={"sm"}
                 fontWeight={500}
-                color={linkColor}
+                color={currentVisibleIndex === index ? "purple.400" : linkColor}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
@@ -243,7 +246,7 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Inspiration",
+    label: "히어로",
     children: [
       {
         label: "Explore Design Work",
@@ -258,7 +261,7 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Find Work",
+    label: "피처",
     children: [
       {
         label: "Job Board",
@@ -273,11 +276,15 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Learn Design",
+    label: "통계",
     href: "#",
   },
   {
-    label: "Hire Designers",
+    label: "가격",
+    href: "#",
+  },
+  {
+    label: "히어로 2",
     href: "#",
   },
 ];

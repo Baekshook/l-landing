@@ -12,6 +12,7 @@ import {
 import { BsPerson } from "react-icons/bs";
 import { FiServer } from "react-icons/fi";
 import { GoLocation } from "react-icons/go";
+import { forwardRef } from "react";
 
 function StatsCard(props) {
   const { title, stat, icon } = props;
@@ -26,7 +27,7 @@ function StatsCard(props) {
     >
       <Flex justifyContent={"space-between"}>
         <Box pl={{ base: 2, md: 4 }}>
-          <StatLabel fontWeight={"medium"} isTruncated color={"purple.400"}>
+          <StatLabel fontWeight={"medium"} color={"purple.400"}>
             {title}
           </StatLabel>
           <StatNumber fontSize={"2xl"} fontWeight={"medium"}>
@@ -42,7 +43,7 @@ function StatsCard(props) {
 }
 
 //linear-gradient(to right, #8c1eaa, #272842)
-export default function BasicStatistics() {
+const Statistics = forwardRef((props, ref) => {
   return (
     <Flex
       direction={"column"}
@@ -51,6 +52,7 @@ export default function BasicStatistics() {
       align={"center"}
       h={"100vh"}
       pos={"relative"}
+      ref={ref}
     >
       <Box
         w={"25%"}
@@ -94,4 +96,6 @@ export default function BasicStatistics() {
       </SimpleGrid>
     </Flex>
   );
-}
+});
+
+export default Statistics;
